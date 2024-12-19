@@ -1,11 +1,11 @@
 PREPROCESSING:
-  DATASET: Celeb-DFv2
+  DATASET: FaceForensicsTest
   COMPRESSION: c0
   SPLIT: test
-  ROOT: /data/deepfake_cluster/datasets_df/Celeb-DFv2/
+  ROOT: /https://drive.google.com/drive/folders/1c6X59JkkjmaKyUI-mwuIhv-1jsy4MPmM?usp=drive_link/
   # FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
   FAKETYPE: [YouTube-real]
-  IMAGE_SUFFIX: png
+  IMAGE_SUFFIX: jpg
   DATA_TYPE: frames
   LABEL: [real]
   facial_lm_pretrained: pretrained/shape_predictor_81_face_landmarks.dat
