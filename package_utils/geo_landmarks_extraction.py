@@ -79,6 +79,16 @@ class LandmarkUtility(object):
         fake_types = self.fake_types
         img_paths = []
 
+        #NjoomEdit:to check what the constructed paths look like and verify their existence:
+        print(f"Looking in directory: {data_dir}")
+        print(f"Fake type: {ft}")
+        print(f"Subdirectories found: {os.listdir(data_dir)}")
+        print("Image root:", self.image_root)
+        print("Current split:", self.split)
+        print("Data type:", self.data_type)
+        print("Fake types:", self.fake_types)
+        
+
         # Load image data for each type of fake techniques
         for idx, ft in enumerate(fake_types):
             data_dir = os.path.join(self.image_root, self.split, data_type, ft)
