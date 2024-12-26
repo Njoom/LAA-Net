@@ -3,8 +3,8 @@ PREPROCESSING:
   COMPRESSION: c0
   SPLIT: test
   ROOT: /content/drive/MyDrive/FaceForensicsTest/
-  # FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
-  FAKETYPE: [YouTube-real]
+  FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
+  # FAKETYPE: [YouTube-real]
   IMAGE_SUFFIX: jpg
   DATA_TYPE: frames
   LABEL: [real]
