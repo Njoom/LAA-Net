@@ -104,6 +104,7 @@ class LandmarkUtility(object):
         print(f"Looking in sub-directory: {sub_dir_path}")
         print(f"Fake type: {ft}")
         print(f"Subdirectories found: {os.listdir(data_dir)}")
+        print(f"img_paths_: {img_paths_}")
         print(f"Image suffix is: {self.image_suffix}")
         
         print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
