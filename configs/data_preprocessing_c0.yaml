@@ -2,7 +2,7 @@ PREPROCESSING:
   DATASET: FaceForensicsTest
   COMPRESSION: c0
   SPLIT: test
-  ROOT: /FaceForensicsTest/
+  ROOT: /FaceForensicsTest/c0
   # FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
   FAKETYPE: [YouTube-real]
   IMAGE_SUFFIX: jpg
