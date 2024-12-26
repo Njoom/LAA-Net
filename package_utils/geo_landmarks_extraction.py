@@ -99,13 +99,18 @@ class LandmarkUtility(object):
                 img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
 
                 img_paths.extend(img_paths_)
-        #NjoomEdit:to check what the constructed paths look like and verify their existence:
-               
+        #NjoomEdit:to check what the constructed paths look like and verify their existence:    
         print(f"Looking in directory: {data_dir}")
         print(f"Fake type: {ft}")
         print(f"Subdirectories found: {os.listdir(data_dir)}")
+        
         print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
         file_names = [ip.split('/')[-1] for ip in img_paths]
+
+        #NjoomEdit:
+        print(f"img_paths: {img_paths}")
+        print(f"img format: {format(len(img_paths)}")
+        !ls {data_dir} 
 
         return img_paths, file_names
 
