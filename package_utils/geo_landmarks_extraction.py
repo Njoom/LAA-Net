@@ -110,8 +110,7 @@ class LandmarkUtility(object):
         #NjoomEdit:
         print(f"img_paths: {img_paths}")
         print(f"img format: {format(img_paths)}")
-        ls {data_dir} 
-
+        
         return img_paths, file_names
 
     def _load_data_from_file(self, file_path):
