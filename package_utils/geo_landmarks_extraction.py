@@ -101,8 +101,10 @@ class LandmarkUtility(object):
                 img_paths.extend(img_paths_)
         #NjoomEdit:to check what the constructed paths look like and verify their existence:    
         print(f"Looking in directory: {data_dir}")
+        print(f"Looking in sub-directory: {sub_dir_path}")
         print(f"Fake type: {ft}")
         print(f"Subdirectories found: {os.listdir(data_dir)}")
+        print(f"Image suffix is: {self.image_suffix}")
         
         print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
         file_names = [ip.split('/')[-1] for ip in img_paths]
