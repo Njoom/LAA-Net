@@ -99,9 +99,9 @@ class LandmarkUtility(object):
             for sub_dir in os.listdir(data_dir):
                 sub_dir_path = os.path.join(data_dir, sub_dir)
                 #NjoomEditPrininting:
-                if os.path.isdir(sub_dir_path):  # Ensure it is a directory
-                print(f"Looking in sub-directory: {sub_dir_path}")
-                print(f"Files found: {os.listdir(sub_dir_path)}")  # This should list files in the directory
+                if os.path.isdir(sub_dir_path): # Ensure it is a directory
+                    print(f"Looking in sub-directory: {sub_dir_path}")
+                    print(f"Files found: {os.listdir(sub_dir_path)}")  # This should list files in the directory
                 img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
                 #NjoomEdit:
                 print(f"Image paths found: {img_paths_}")  # See what images are loaded from this directory
