@@ -85,23 +85,25 @@ class LandmarkUtility(object):
         data_type = self.data_type
         fake_types = self.fake_types
         img_paths = []
-
      # Load image data for each type of fake techniques
         for idx, ft in enumerate(fake_types):
             data_dir = os.path.join(self.image_root, self.split, data_type, ft)
             if not os.path.exists(data_dir):
                 raise ValueError("Data Directory can not be invalid!")
                 # Move to load each subdirectory under da
-            for sub_dir in os.listdir(data_dir):
-                sub_dir_path = os.path.join(data_dir, sub_dir)
-                if os.path.isdir(sub_dir_path):  # Check if sub_dir_path is a director
-                    print(f"Looking in sub-directory: {sub_dir_path}")
-                    img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')  # This looks inside the director
-                    print(f"Image paths found: {img_paths_}")  # Check what images are actually foun
-                    img_paths.extend(img_paths_)
-                else:
-                    print(f"Skipping non-directory: {sub_dir_path}")
-        
+            print(f"Data directory checked: {data_dir}")
+            if os.listdir(data_dir):  # If the directory is not empt
+                for entry in os.listdir(data_dir):
+                    sub_dir_path = os.path.join(data_dir, entry)
+                    if os.path.isdir(sub_dir_path):  # Check if it's a director
+                        print(f"Looking in sub-directory: {sub_dir_path}")
+                        img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
+                        print(f"Image paths found: {img_paths_}")
+                        img_paths.extend(img_paths_)
+                   else:  # If it's a file, we can directly append it if it matches the suffix
+                       if entry.endswith(f'.{self.image_suffix}'):
+                           img_paths.append(sub_dir_path)
+
         print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
         file_names = [ip.split('/')[-1] for ip in img_paths]
         
