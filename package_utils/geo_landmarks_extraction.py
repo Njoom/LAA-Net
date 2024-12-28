@@ -96,12 +96,17 @@ class LandmarkUtility(object):
             
             for sub_dir in os.listdir(data_dir):
                 sub_dir_path = os.path.join(data_dir, sub_dir)
+                #NjoomEditPrininting:
+                print(f"Looking in {sub_dir_path}")
+                print(f"Files found: {os.listdir(sub_dir_path)}")
                 img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
 
                 img_paths.extend(img_paths_)
         #NjoomEdit:to check what the constructed paths look like and verify their existence:    
         print(f"Looking in directory: {data_dir}")
+        print(f"Second_check_Files in {sub_dir_path}: {os.listdir(sub_dir_path)}")
         print(f"Looking in sub-directory: {sub_dir_path}")
+        print(f"Second_check_Subdirectories found: {os.listdir(data_dir)}")
         print(f"Fake type: {ft}")
         print(f"Subdirectories found: {os.listdir(data_dir)}")
         print(f"img_paths_: {img_paths_}")
