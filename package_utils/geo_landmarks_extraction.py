@@ -86,38 +86,30 @@ class LandmarkUtility(object):
         fake_types = self.fake_types
         img_paths = []
 
-
-
-        # Load image data for each type of fake techniques
+     # Load image data for each type of fake techniques
         for idx, ft in enumerate(fake_types):
             data_dir = os.path.join(self.image_root, self.split, data_type, ft)       
+            #NjoomEdit: 
+            print(f"Data directory checked: {data_dir}")
             if not os.path.exists(data_dir):
                 raise ValueError("Data Directory can not be invalid!")
+            #NjoomEdit:
+            print(f"Contents of {data_dir}: {os.listdir(data_dir)}")
             
             for sub_dir in os.listdir(data_dir):
                 sub_dir_path = os.path.join(data_dir, sub_dir)
                 #NjoomEditPrininting:
-                #print(f"Looking in {sub_dir_path}")
-                #print(f"Files found: {os.listdir(sub_dir_path)}")
+                if os.path.isdir(sub_dir_path):  # Ensure it is a directory
+                print(f"Looking in sub-directory: {sub_dir_path}")
+                print(f"Files found: {os.listdir(sub_dir_path)}")  # This should list files in the directory
                 img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
-
+                #NjoomEdit:
+                print(f"Image paths found: {img_paths_}")  # See what images are loaded from this directory
                 img_paths.extend(img_paths_)
-        #NjoomEdit:to check what the constructed paths look like and verify their existence:    
-        print(f"Looking in directory: {data_dir}")
-        print(f"Second_check_Files in {sub_dir_path}: {os.listdir(sub_dir_path)}")
-        print(f"Looking in sub-directory: {sub_dir_path}")
-        print(f"Second_check_Subdirectories found: {os.listdir(data_dir)}")
-        print(f"Fake type: {ft}")
-        print(f"Subdirectories found: {os.listdir(data_dir)}")
-        print(f"img_paths_: {img_paths_}")
-        print(f"Image suffix is: {self.image_suffix}")
+        
         
         print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
         file_names = [ip.split('/')[-1] for ip in img_paths]
-
-        #NjoomEdit:
-        print(f"img_paths: {img_paths}")
-        print(f"img format: {format(img_paths)}")
         
         return img_paths, file_names
 
