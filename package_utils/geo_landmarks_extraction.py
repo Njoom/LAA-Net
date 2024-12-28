@@ -100,7 +100,7 @@ class LandmarkUtility(object):
                         img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
                         print(f"Image paths found: {img_paths_}")
                         img_paths.extend(img_paths_)
-                   else:  # If it's a file, we can directly append it if it matches the suffix
+                    else:  # If it's a file, we can directly append it if it matches the suffix
                        if entry.endswith(f'.{self.image_suffix}'):
                            img_paths.append(sub_dir_path)
 
