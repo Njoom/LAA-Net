@@ -97,8 +97,8 @@ class LandmarkUtility(object):
             for sub_dir in os.listdir(data_dir):
                 sub_dir_path = os.path.join(data_dir, sub_dir)
                 #NjoomEditPrininting:
-                print(f"Looking in {sub_dir_path}")
-                print(f"Files found: {os.listdir(sub_dir_path)}")
+                #print(f"Looking in {sub_dir_path}")
+                #print(f"Files found: {os.listdir(sub_dir_path)}")
                 img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
 
                 img_paths.extend(img_paths_)
