@@ -8,7 +8,7 @@ PREPROCESSING:
   IMAGE_SUFFIX: jpg
   DATA_TYPE: frames
   LABEL: [real]
-  facial_lm_pretrained: pretrained/shape_predictor_81_face_landmarks.dat
+  facial_lm_pretrained: /content/LAA-Net/pretrained/shape_predictor_81_face_landmarks.dat
   N_LANDMARKS: 81
   SAMPLING:
     ACTIVE: False
