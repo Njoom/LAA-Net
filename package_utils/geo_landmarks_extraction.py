@@ -130,6 +130,7 @@ class LandmarkUtility(object):
         return obj
     
     def _load_image(self, img_path):
+        print("Detecting landmarks for image...")
         image = cv2.imread(os.path.join(self.image_root, img_path))
         return image
 
@@ -143,8 +144,12 @@ class LandmarkUtility(object):
         if len(f_rect) > 0:
             f_lms = lm_predictor(gray, f_rect[0])
             f_lms = face_utils.shape_to_np(f_lms)
+            #NjoomEdit
+            print("Landmarks detected.")
             return f_lms
         else:
+            #NjoomEdit:
+            print("No faces detected!")
             return None
         
     def _align_face(self, image, f_lms):
