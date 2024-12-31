@@ -283,18 +283,23 @@ if __name__ == '__main__':
         rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
         #NjoomEdit: add the 1st for to make sure all types will be detected.
         if save_aligned:
+            # Create a single main output directory for aligned images
+            main_aligned_dir = f'{lm_ins.image_root}{lm_ins.split}/{lm_ins.data_type}/aligned_{cfg.PREPROCESSING.N_LANDMARKS}'
+            os.makedirs(main_aligned_dir, exist_ok=True)
             # Process each type from lm_ins.fake_types
             for fake_type in lm_ins.fake_types:
-                # Create the base directory for aligned images for each type
-                aligned_base_dir = f'{lm_ins.image_root}{lm_ins.split}/{lm_ins.data_type}/aligned_{fake_type}_{cfg.PREPROCESSING.N_LANDMARKS}'
-                os.makedirs(aligned_base_dir, exist_ok=True)
+                # Create the subdirectory for each fake type inside the main aligned directory 
+                type_dir = os.path.join(main_aligned_dir, fake_type)
+                os.makedirs(type_dir, exist_ok=True)
                 #os.makedirs(f'{lm_ins.image_root}{lm_ins.split}/{lm_ins.data_type}/aligned_{lm_ins.fake_types[0]}_{cfg.PREPROCESSING.N_LANDMARKS}', exist_ok=True)
                 for i, img_p in enumerate(tqdm(img_paths, dynamic_ncols=True)): # Iterate over all loaded images and their corresponding landmarks
                     rot_img = rot_imgs[i]
                     fn = file_names[i]
                     vid_id = img_p.split('/')[-2]   # Get the folder name (e.g., "Deepfakes")
                     # Ensure sub-directory for the video/photograph ID exists
-                    os.makedirs(f'{lm_ins.image_root}{lm_ins.split}/{lm_ins.data_type}/aligned_{lm_ins.fake_types[0]}_{cfg.PREPROCESSING.N_LANDMARKS}/{vid_id}', exist_ok=True)
+                    #os.makedirs(f'{lm_ins.image_root}{lm_ins.split}/{lm_ins.data_type}/aligned_{lm_ins.fake_types[0]}_{cfg.PREPROCESSING.N_LANDMARKS}/{vid_id}', exist_ok=True)
+                    id_dir = os.path.join(type_dir, vid_id)
+                    os.makedirs(id_dir, exist_ok=True)
                     # Define the path to save the aligned image
                     #aligned_img_p = img_p.replace(lm_ins.fake_types[0], f'aligned_{lm_ins.fake_types[0]}_{cfg.PREPROCESSING.N_LANDMARKS}')
                     #cv2.imwrite(os.path.join(lm_ins.image_root, aligned_img_p), rot_img)
