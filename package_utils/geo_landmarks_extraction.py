@@ -278,20 +278,17 @@ if __name__ == '__main__':
         assert cfg.PREPROCESSING.facial_lm_pretrained is not None, "Landmark pretrained can not be None!"
         f_detector = dlib.get_frontal_face_detector()
         f_lm_detector = dlib.shape_predictor(cfg.PREPROCESSING.facial_lm_pretrained)
-        # NjoomEdit: Create a dictionary to hold images and filenames by type
-        #aligned_images = {}
-        #rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
-        #NjoomEdit: add the 1st for to make sure all types will be detected.
         if save_aligned:
-             # Create a single main output directory for aligned images
-            main_aligned_dir = f'{lm_ins.image_root}{lm_ins.split}/{lm_ins.data_type}/aligned_{cfg.PREPROCESSING.N_LANDMARKS}'
-            os.makedirs(main_aligned_dir, exist_ok=True)
-
-            # Create a dictionary to hold all aligned images by fake type
-            aligned_images_by_type = {fake_type: [] for fake_type in lm_ins.fake_types}
-
-            # Iterate over all loaded images and their corresponding landmarks
-            rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
+            #  Define main output directory based on dataset name and split
+            main_output_dir = f'{lm_ins.image_root}/{lm_ins.split}/frames/'
+            os.makedirs(main_output_dir, exist_ok=True)
+            # Create a specific directory for aligned frames
+            aligned_dir = os.path.join(main_output_dir, 'aligned_81')
+            os.makedirs(aligned_dir, exist_ok=True)
+            for fake_type in fake_types:
+                os.makedirs(os.path.join(aligned_dir, fake_type), exist_ok=True)
+                # Iterate over all loaded images and their corresponding landmarks
+                rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
 
             # Iterate through images to save them in their respective directories
             for i, img_p in enumerate(tqdm(img_paths, dynamic_ncols=True)):
@@ -299,14 +296,9 @@ if __name__ == '__main__':
                 fn = file_names[i]
                 fake_type = img_p.split('/')[-3]  # Assuming the path structure allows for this
 
-                # Create the folder for each fake type if it doesn't exist
-                type_dir = os.path.join(main_aligned_dir, fake_type)
-                os.makedirs(type_dir, exist_ok=True)
-
                 # Define the output path for the aligned image
-                aligned_img_path = os.path.join(type_dir, fn)  # Save each image directly in its type folder
+                aligned_img_path = os.path.join(aligned_dir, fake_type, fn)
                 cv2.imwrite(aligned_img_path, rot_img)  # Save aligned image
-                aligned_images_by_type[fake_type].append(aligned_img_path)  # Track saved images
                 
         print('All landmarks have been detected and stored in memory!')
         print('Ready to save to file...')
