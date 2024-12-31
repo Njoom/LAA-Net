@@ -279,8 +279,8 @@ if __name__ == '__main__':
         f_detector = dlib.get_frontal_face_detector()
         f_lm_detector = dlib.shape_predictor(cfg.PREPROCESSING.facial_lm_pretrained)
         # NjoomEdit: Create a dictionary to hold images and filenames by type
-        aligned_images = {}
-        rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
+        #aligned_images = {}
+        #rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
         #NjoomEdit: add the 1st for to make sure all types will be detected.
         if save_aligned:
             # Create a single main output directory for aligned images
