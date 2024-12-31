@@ -285,6 +285,8 @@ if __name__ == '__main__':
             # Create a specific directory for aligned frames
             aligned_dir = os.path.join(main_output_dir, 'aligned_81')
             os.makedirs(aligned_dir, exist_ok=True)
+            # Create subdirectories for each fake type within the aligned directory
+            fake_types = lm_ins.fake_types  # Assuming lm_ins.fake_types contains ['deepfakes', 'Face2Face', 'NeuralTextures', 'original']
             for fake_type in fake_types:
                 os.makedirs(os.path.join(aligned_dir, fake_type), exist_ok=True)
                 # Iterate over all loaded images and their corresponding landmarks
