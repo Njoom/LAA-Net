@@ -300,7 +300,9 @@ if __name__ == '__main__':
                 fake_type = img_p.split('/')[-3]  # Assuming the path structure allows for this
 
                 # Define the output path for the aligned image
-                aligned_img_path = os.path.join(aligned_dir, fake_type, fn)
+                aligned_img_path = os.path.join(aligned_dir, fake_type,fn)
+                # Ensure the generated path directory exists before saving
+                os.makedirs(os.path.dirname(aligned_img_path), exist_ok=True)  # Ensure the fake_type directory exists
                 # Save aligned image and check if it was saved successfull
                 if cv2.imwrite(aligned_img_path, rot_img):
                     print(f'Saved aligned image: {aligned_img_path}')
