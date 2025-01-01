@@ -291,6 +291,7 @@ if __name__ == '__main__':
                 os.makedirs(os.path.join(aligned_dir, fake_type), exist_ok=True)
                 # Iterate over all loaded images and their corresponding landmarks
                 rot_imgs, f_lmses, rot_f_lmses = lm_ins.facial_landmarks(img_paths, f_detector, f_lm_detector)
+                print(f'Processed {len(rot_imgs)} images.')  # Confirm images are processed
 
             # Iterate through images to save them in their respective directories
             for i, img_p in enumerate(tqdm(img_paths, dynamic_ncols=True)):
@@ -300,7 +301,11 @@ if __name__ == '__main__':
 
                 # Define the output path for the aligned image
                 aligned_img_path = os.path.join(aligned_dir, fake_type, fn)
-                cv2.imwrite(aligned_img_path, rot_img)  # Save aligned image
+                # Save aligned image and check if it was saved successfull
+                if cv2.imwrite(aligned_img_path, rot_img):
+                    print(f'Saved aligned image: {aligned_img_path}')
+                else:
+                    print(f'Failed to save aligned image: {aligned_img_path}')
                 
         print('All landmarks have been detected and stored in memory!')
         print('Ready to save to file...')
