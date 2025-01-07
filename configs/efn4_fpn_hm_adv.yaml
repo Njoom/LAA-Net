@@ -25,10 +25,10 @@ DATASET:
       TEST: 32
     TRAIN:
       NAME: FF++ # This field to define datasets that can be used to train/in-dataset/cross-dataset evaluation
-      ROOT: /home/users/<user>/data/FaceForensics++/c0/
+      ROOT: /content/drive/MyDrive/FaceForensicsTest/
       # ROOT: /data/deepfake_cluster/datasets_df/FaceForensics++/c0/
       FROM_FILE: True
-      FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
+      FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
       # ANNO_FILE: train/frames/FaceXRay/train_FF_FaceXRay.json
       ANNO_FILE: processed_data/c0/dynamic_trainBI_FFv2.json
       LABEL_FOLDER: [real, fake]
