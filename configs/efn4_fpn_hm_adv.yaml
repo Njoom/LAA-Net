@@ -7,10 +7,10 @@ DATASET:
   type: HeatmapFaceForensic
   TRAIN: True #Switch to True for training mode, False for testing mode
   COMPRESSION: c0
-  IMAGE_SUFFIX: png
+  IMAGE_SUFFIX: jpg
   NUM_WORKERS: 7
   PIN_MEMORY: True
-  IMAGE_SIZE: [384, 384]
+  IMAGE_SIZE: [300, 300]
   HEATMAP_SIZE: [96, 96] #[IMAGE_SIZE//4, IMAGE_SIZE//4]
   SIGMA: 2
   ADAPTIVE_SIGMA: True
@@ -151,7 +151,7 @@ TEST:
 PREPROCESSING:
   DATASET: FaceForensics
   SPLIT: train
-  ROOT: /data/deepfake_cluster/datasets_df/FaceForensics++/c23/
+  ROOT: /content/drive/MyDrive/FaceForensicsTest/
   FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
   IMAGE_SUFFIX: jpg
   DATA_TYPE: images
