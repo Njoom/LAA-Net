@@ -206,7 +206,7 @@ class LandmarkUtility(object):
             rot_f_lmses.append(rot_f_lms)
             
             # Visualizing landmarks to test
-            if i < 10 and self.debug:
+            if i < 50 and self.debug: # modify: i < 10
                 print(f"Drawing landmarks for image {i}...")  # Debugging outpu
                 # Print landmark coordinates to check values before drawin
                 if rot_f_lms:  # Check if landmarks exis
