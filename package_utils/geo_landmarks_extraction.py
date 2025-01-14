@@ -285,7 +285,7 @@ if __name__ == '__main__':
             print(f"Error initializing face detector: {e}")
             f_detector = None  # Set to None to avoid using an uninitialized detector
         #NjoomEdit:# Load the shape predictor model
-        shape_predictor_path = cfg.PREPROCESSING.facial_lm_pretraine
+        shape_predictor_path = cfg.PREPROCESSING.facial_lm_pretrained
         try:
             f_lm_detector = dlib.shape_predictor(shape_predictor_path)
             print(f"Shape predictor model loaded successfully from {shape_predictor_path}.")
