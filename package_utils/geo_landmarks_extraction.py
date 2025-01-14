@@ -176,7 +176,8 @@ class LandmarkUtility(object):
         return rot_img, f_lms, rot_f_lms
         
     def facial_landmarks(self, img_paths, detector, lm_predictor):
-        print("Starting facial_landmarks function...")
+        if self.debug:
+            print(f"Total images to process: {len(img_paths)}")
         rot_imgs, f_lmses, rot_f_lmses = [], [], [] 
         
         for i, ip in enumerate(tqdm(img_paths, dynamic_ncols=True)):
@@ -196,7 +197,6 @@ class LandmarkUtility(object):
                 
             if i == 1:
                 print('Landmark detection processing time ---- {}'.format(time.time() - s_t))
-            
             if (f_lms is not None):
                 rot_img, _f_lms, rot_f_lms = self._align_face(image, f_lms)  
             else: 
@@ -206,21 +206,15 @@ class LandmarkUtility(object):
             rot_f_lmses.append(rot_f_lms)
             
             # Visualizing landmarks to test
-            if i < 50 and self.debug: # modify: i < 10
-                print(f"Drawing landmarks for image {i}...")  # Debugging outpu
-                # Print landmark coordinates to check values before drawin
-                if rot_f_lms:  # Check if landmarks exis
-                    print(f"Landmarks coordinates for image {i}: {rot_f_lms}")
-                    rot_img = draw_landmarks(rot_img, rot_f_lms)
-                    # Verify if landmarks were drawn correctly on the image
-                if rot_img is None:
-                    print(f"Warning: Rotated image is None after drawing landmarks for image {i}.")
-                else:
-                    print(f"Landmarks drawn successfully for image {i}. Saving the image...")
-                    cv2.imwrite(f'samples/test_{i}.jpg', rot_img)
+            #if i < 50 and self.debug: # modify: i < 10
+            print(f"Drawing landmarks for image {i}...")  # Debugging outp
+            if rot_f_lms:  # Check if landmarks exist
+                print(f"Landmarks coordinates for image {i}: {rot_f_lms}")
+                rot_img = draw_landmarks(rot_img, rot_f_lms)
+                print(f"Landmarks drawn successfully for image {i}. Saving the image...")
+                cv2.imwrite(f'samples/test_{i}.jpg', rot_img)
                 #rot_img = draw_landmarks(rot_img, rot_f_lms)
                 #cv2.imwrite(f'samples/test_{i}.jpg', rot_img)
-            
             if i % 100 == 0:
                 print(f'Landmarks have been detected for {i} images')
         return rot_imgs, f_lmses, rot_f_lmses
