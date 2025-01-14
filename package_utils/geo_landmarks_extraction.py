@@ -204,7 +204,7 @@ class LandmarkUtility(object):
             else:
                 orig_lmses = kwargs['orig_lmses']
                 assert len(orig_lmses) == len(img_paths), "The length of images and landmarks is not compatible!"
-                print(f"Original landmarks found: {len(orig_lmses)} landmarks")
+                #print(f"Original landmarks found: {len(orig_lmses)} landmarks")
                 
         if 'aligned_lmses' in kwargs.keys():
             if not bool(kwargs['aligned_lmses']):
@@ -212,22 +212,22 @@ class LandmarkUtility(object):
             else:
                 aligned_lmses = kwargs['aligned_lmses']
                 assert len(aligned_lmses) == len(img_paths), "The length of images and aligned landmarks is not compatible!"
-                print(f"Original landmarks found: {len(orig_lmses)} landmarks")
+                #print(f"Original landmarks found: {len(orig_lmses)} landmarks")
         
         for i, (p, f) in enumerate(zip(img_paths, file_names)):
             fake_type = p.split('/')[-2] if self.fake_types != ['original'] else self.fake_types[0]
             img_obj = self._img_obj(p, f, id=i, fake_type=fake_type)
-            print(f"Processing image {i + 1}/{len(img_paths)}: {f} (Path: {p})")
+            #print(f"Processing image {i + 1}/{len(img_paths)}: {f} (Path: {p})")
             
             if 'orig_lmses' in kwargs.keys(): 
                 img_obj['orig_lms'] = orig_lmses[i].tolist() if isinstance(orig_lmses[i], np.ndarray) else orig_lmses[i] #To save to JSON
-                print(f"Original landmarks for {f}: {img_obj['orig_lms']}")
+                #print(f"Original landmarks for {f}: {img_obj['orig_lms']}")
             if 'aligned_lmses' in kwargs.keys():
                 img_obj['aligned_lms'] = aligned_lmses[i].tolist() if isinstance(aligned_lmses[i], np.ndarray) else aligned_lmses[i] #To save to JSON
-                print(f"Aligned landmarks for {f}: {img_obj['aligned_lms']}")
+                #print(f"Aligned landmarks for {f}: {img_obj['aligned_lms']}")
             
             data["data"].append(img_obj)
-        print(f"Total data constructed: {len(data['data'])} images with landmarks.")
+        #print(f"Total data constructed: {len(data['data'])} images with landmarks.")
         return data
 
     def save2json(self, data, fn='faceforensics_processed.json'):
