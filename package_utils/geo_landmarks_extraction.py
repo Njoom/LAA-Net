@@ -137,19 +137,21 @@ class LandmarkUtility(object):
     def _facial_landmark(self, image, detector, lm_predictor):
         try:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        except:
+        except Exception as e:
+            print(f"Error converting image to grayscale: {e}")
             gray = image
-        
+
+        print(f"Original image shape: {image.shape}") #NjoomEdit
         f_rect = detector(gray, 1)
+        print(f"Number of faces detected: {len(f_rect)}") #NjoomEdit
         if len(f_rect) > 0:
+            print(f"Detected face rectangles: {f_rect}") #NjoomEdit
             f_lms = lm_predictor(gray, f_rect[0])
             f_lms = face_utils.shape_to_np(f_lms)
-            #NjoomEdit
-            print("Landmarks detected.")
+            print("Landmarks detected.") #NjoomEdit
             return f_lms
         else:
-            #NjoomEdit:
-            print("No faces detected!")
+            print("No faces detected!") #NjoomEdit
             return None
         
     def _align_face(self, image, f_lms):
@@ -276,26 +278,8 @@ if __name__ == '__main__':
     
     if extract_landmark:
         assert cfg.PREPROCESSING.facial_lm_pretrained is not None, "Landmark pretrained can not be None!"
-        
-        # NjoomEdit: Initialize Dlib's face detector
-        try:
-            f_detector = dlib.get_frontal_face_detector()
-            print("Face detector initialized successfully.")
-        except Exception as e:
-            print(f"Error initializing face detector: {e}")
-            f_detector = None  # Set to None to avoid using an uninitialized detector
-        #NjoomEdit:# Load the shape predictor model
-        shape_predictor_path = cfg.PREPROCESSING.facial_lm_pretrained
-        try:
-            f_lm_detector = dlib.shape_predictor(shape_predictor_path)
-            print(f"Shape predictor model loaded successfully from {shape_predictor_path}.")
-        except Exception as e:
-            print(f"Error loading shape predictor model from {shape_predictor_path}: {e}")
-            f_lm_detector = None  # Set to None to avoid using an uninitialized predictor
-    
-        #f_detector = dlib.get_frontal_face_detector()
-        #f_lm_detector = dlib.shape_predictor(cfg.PREPROCESSING.facial_lm_pretrained)
-
+        f_detector = dlib.get_frontal_face_detector()
+        f_lm_detector = dlib.shape_predictor(cfg.PREPROCESSING.facial_lm_pretrained)
         if save_aligned:
             #  Define main output directory based on dataset name and split
             main_output_dir = f'{lm_ins.image_root}/{lm_ins.split}/frames/'
