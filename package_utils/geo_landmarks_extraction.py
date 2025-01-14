@@ -176,6 +176,7 @@ class LandmarkUtility(object):
         return rot_img, f_lms, rot_f_lms
         
     def facial_landmarks(self, img_paths, detector, lm_predictor):
+        print("Starting facial_landmarks function...")
         rot_imgs, f_lmses, rot_f_lmses = [], [], [] 
         
         for i, ip in enumerate(tqdm(img_paths, dynamic_ncols=True)):
