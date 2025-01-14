@@ -1,11 +1,13 @@
+#this file is  a structured way to define parameters and settings for a deep learning model training process, specifically targeting the detection of manipulated images, such as those found in deepfake technology.
 TASK: EFN_hm10_EFPN_NoBasedCLS_Focal_C2_256Cst100_32FXRayv2_SAM(Adam)_ADV_Era3_OutSoftMax_5e5_div4_FZ
-PRECISION: float64
+PRECISION: float64 #Sets the precision of the computations.
 METRICS_BASE: binary
-SEED: 317
-DATA_RELOAD: True
+SEED: 317 #Specifies a random seed to ensure reproducibility in experiments by controlling random number generation.
+DATA_RELOAD: True #Indicates whether the dataset should be reloaded every time
 DATASET:
   type: HeatmapFaceForensic
-  TRAIN: True #Switch to True for training mode, False for testing mode
+  #TRAIN: Switch to True for training mode, False for testing mode
+  TRAIN: True
   COMPRESSION: c0
   IMAGE_SUFFIX: jpg
   NUM_WORKERS: 7
@@ -29,6 +31,7 @@ DATASET:
       # ROOT: /data/deepfake_cluster/datasets_df/FaceForensics++/c0/
       FROM_FILE: True
       FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
+      #ANNO_FILE:Path to annotation files that provide labels for the data.
       # ANNO_FILE: train/frames/FaceXRay/train_FF_FaceXRay.json
       ANNO_FILE: processed_data/c0/test_81_FF++_processed.json
       LABEL_FOLDER: [real, fake]
@@ -143,6 +146,7 @@ TEST:
   gpus: [0]
   subtask: 'eval'
   test_file: ''
+  #vis_hm: A flag indicating if heatmaps should be visualized during the testing process.
   vis_hm: True
   threshold: 0.5
   flip_test: True
