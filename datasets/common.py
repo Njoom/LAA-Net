@@ -11,7 +11,7 @@ from glob import glob
 import numpy as np
 from box import Box as edict
 
-from builder import DATASETS
+from .builder import DATASETS
 from package_utils.utils import file_extention
 from package_utils.transform import final_transform
 from package_utils.image_utils import cal_mask_wh, gaussian_radius
