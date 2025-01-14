@@ -206,8 +206,19 @@ class LandmarkUtility(object):
             
             # Visualizing landmarks to test
             if i < 10 and self.debug:
-                rot_img = draw_landmarks(rot_img, rot_f_lms)
-                cv2.imwrite(f'samples/test_{i}.jpg', rot_img)
+                print(f"Drawing landmarks for image {i}...")  # Debugging outpu
+                # Print landmark coordinates to check values before drawin
+                if rot_f_lms:  # Check if landmarks exis
+                    print(f"Landmarks coordinates for image {i}: {rot_f_lms}")
+                    rot_img = draw_landmarks(rot_img, rot_f_lms)
+                    # Verify if landmarks were drawn correctly on the image
+                if rot_img is None:
+                    print(f"Warning: Rotated image is None after drawing landmarks for image {i}.")
+                else:
+                    print(f"Landmarks drawn successfully for image {i}. Saving the image...")
+                    cv2.imwrite(f'samples/test_{i}.jpg', rot_img)
+                #rot_img = draw_landmarks(rot_img, rot_f_lms)
+                #cv2.imwrite(f'samples/test_{i}.jpg', rot_img)
             
             if i % 100 == 0:
                 print(f'Landmarks have been detected for {i} images')
