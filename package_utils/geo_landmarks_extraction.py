@@ -65,12 +65,6 @@ class LandmarkUtility(object):
             assert self.__contain__('file_path'), "Loading data from file need a file path"
             img_paths, file_names = self._load_data_from_file(self.__getattribute__('file_path'))
 
-        #NjoomEdit:to check what the constructed paths look like and verify their existence:
-        print("Image root:", self.image_root)
-        print("Current split:", self.split)
-        print("Data type:", self.data_type)
-        print("Fake types:", self.fake_types)
-        
         
         assert len(img_paths) != 0, "Image paths have not been loaded! Please check image directory!"
         assert len(file_names) != 0, "Image files have not been loaded! Please check image suffixes!"
@@ -104,7 +98,7 @@ class LandmarkUtility(object):
                        if entry.endswith(f'.{self.image_suffix}'):
                            img_paths.append(sub_dir_path)
 
-        print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
+        #print('{} image paths have been loaded from {}!'.format(len(img_paths), self.dataset))
         file_names = [ip.split('/')[-1] for ip in img_paths]
         
         return img_paths, file_names
@@ -130,7 +124,7 @@ class LandmarkUtility(object):
         return obj
     
     def _load_image(self, img_path):
-        print("Detecting landmarks for image...")
+        #print("Detecting landmarks for image...")
         image = cv2.imread(os.path.join(self.image_root, img_path))
         return image
 
@@ -138,20 +132,13 @@ class LandmarkUtility(object):
         try:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         except Exception as e:
-            
             gray = image
-
-        
         f_rect = detector(gray, 1)
-        
         if len(f_rect) > 0:
-            
             f_lms = lm_predictor(gray, f_rect[0])
             f_lms = face_utils.shape_to_np(f_lms)
-            
             return f_lms
         else:
-            
             return None
         
     def _align_face(self, image, f_lms):
@@ -179,7 +166,6 @@ class LandmarkUtility(object):
         rot_imgs, f_lmses, rot_f_lmses = [], [], [] 
         for i, ip in enumerate(tqdm(img_paths, dynamic_ncols=True)):
             image = self._load_image(ip)
-            
             # Checking time processing for each item
             s_t = time.time()
             f_lms = None
@@ -212,7 +198,6 @@ class LandmarkUtility(object):
 
     def build_data(self, img_paths, file_names, **kwargs):
         data = dict(data=[])
-        
         if 'orig_lmses' in kwargs.keys():
             if not bool(kwargs['orig_lmses']):
                 raise ValueError("Original Landmarks cannot be None!")
