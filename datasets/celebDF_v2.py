@@ -5,7 +5,7 @@ from glob import glob
 import numpy as np
 
 from .builder import DATASETS
-from common import CommonDataset
+from .common import CommonDataset
 
 
 @DATASETS.register_module()
