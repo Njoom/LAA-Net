@@ -91,14 +91,14 @@ class LandmarkUtility(object):
             if not os.path.exists(data_dir):
                 raise ValueError("Data Directory can not be invalid!")
                 # Move to load each subdirectory under da
-            print(f"Data directory checked: {data_dir}")
+            
             if os.listdir(data_dir):  # If the directory is not empt
                 for entry in os.listdir(data_dir):
                     sub_dir_path = os.path.join(data_dir, entry)
                     if os.path.isdir(sub_dir_path):  # Check if it's a director
-                        print(f"Looking in sub-directory: {sub_dir_path}")
+                        
                         img_paths_ = glob(f'{sub_dir_path}/*.{self.image_suffix}')
-                        print(f"Image paths found: {img_paths_}")
+                        
                         img_paths.extend(img_paths_)
                     else:  # If it's a file, we can directly append it if it matches the suffix
                        if entry.endswith(f'.{self.image_suffix}'):
@@ -138,20 +138,20 @@ class LandmarkUtility(object):
         try:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
         except Exception as e:
-            print(f"Error converting image to grayscale: {e}")
+            
             gray = image
 
-        print(f"Original image shape: {image.shape}") #NjoomEdit
+        
         f_rect = detector(gray, 1)
-        print(f"Number of faces detected: {len(f_rect)}") #NjoomEdit
+        
         if len(f_rect) > 0:
-            print(f"Detected face rectangles: {f_rect}") #NjoomEdit
+            
             f_lms = lm_predictor(gray, f_rect[0])
             f_lms = face_utils.shape_to_np(f_lms)
-            print("Landmarks detected.") #NjoomEdit
+            
             return f_lms
         else:
-            print("No faces detected!") #NjoomEdit
+            
             return None
         
     def _align_face(self, image, f_lms):
@@ -219,6 +219,7 @@ class LandmarkUtility(object):
             else:
                 orig_lmses = kwargs['orig_lmses']
                 assert len(orig_lmses) == len(img_paths), "The length of images and landmarks is not compatible!"
+                print(f"Original landmarks found: {len(orig_lmses)} landmarks")
                 
         if 'aligned_lmses' in kwargs.keys():
             if not bool(kwargs['aligned_lmses']):
@@ -226,16 +227,22 @@ class LandmarkUtility(object):
             else:
                 aligned_lmses = kwargs['aligned_lmses']
                 assert len(aligned_lmses) == len(img_paths), "The length of images and aligned landmarks is not compatible!"
+                print(f"Original landmarks found: {len(orig_lmses)} landmarks")
         
         for i, (p, f) in enumerate(zip(img_paths, file_names)):
             fake_type = p.split('/')[-2] if self.fake_types != ['original'] else self.fake_types[0]
             img_obj = self._img_obj(p, f, id=i, fake_type=fake_type)
+            print(f"Processing image {i + 1}/{len(img_paths)}: {f} (Path: {p})")
             
             if 'orig_lmses' in kwargs.keys(): 
                 img_obj['orig_lms'] = orig_lmses[i].tolist() if isinstance(orig_lmses[i], np.ndarray) else orig_lmses[i] #To save to JSON
+                print(f"Original landmarks for {f}: {img_obj['orig_lms']}")
             if 'aligned_lmses' in kwargs.keys():
                 img_obj['aligned_lms'] = aligned_lmses[i].tolist() if isinstance(aligned_lmses[i], np.ndarray) else aligned_lmses[i] #To save to JSON
+                print(f"Aligned landmarks for {f}: {img_obj['aligned_lms']}")
+            
             data["data"].append(img_obj)
+        print(f"Total data constructed: {len(data['data'])} images with landmarks.")
         return data
 
     def save2json(self, data, fn='faceforensics_processed.json'):
