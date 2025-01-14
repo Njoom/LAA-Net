@@ -8,8 +8,8 @@ import torch
 from PIL import Image
 import numpy as np
 
-from .builder import DATASETS, PIPELINES, build_pipeline
-from .common import CommonDataset
+from builder import DATASETS, PIPELINES, build_pipeline
+from common import CommonDataset
 
 
 @DATASETS.register_module()
