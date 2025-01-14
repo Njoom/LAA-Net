@@ -30,15 +30,15 @@ DATASET:
       FROM_FILE: True
       FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
       # ANNO_FILE: train/frames/FaceXRay/train_FF_FaceXRay.json
-      ANNO_FILE: processed_data/c0/dynamic_trainBI_FFv2.json
+      ANNO_FILE: processed_data/c0/test_81_FF++_processed.json
       LABEL_FOLDER: [real, fake]
     VAL:
       NAME: FF++ # This field to define datasets that can be used to train/in-dataset/cross-dataset evaluation
-      ROOT: /home/users/<user>/data/FaceForensics++/c0/
+      ROOT: /content/drive/MyDrive/FaceForensicsTest/
       FROM_FILE: True
-      FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures] # Choosing Deepfake techniques to be loaded for dataloader
+      FAKETYPE: [Deepfakes, Face2Face,  NeuralTextures] # Choosing Deepfake techniques to be loaded for dataloader
       # ANNO_FILE: val/frames/FaceXRay/val_FF_FaceXRay.json
-      ANNO_FILE: processed_data/c0/dynamic_valBI_FFv2.json
+      ANNO_FILE: processed_data/c0/test_81_FF++_processed.json
       LABEL_FOLDER: [real, fake]
     TEST:
       NAME: DFW
@@ -49,7 +49,7 @@ DATASET:
       # ROOT: /home/users/<user>/data/DFDCP/
       # ROOT: /home/users/<user>/data/DFDC/
       # ROOT: /home/users/<user>/data/DFD/
-      ROOT: /home/users/<user>/data/DFW/
+      ROOT: /content/drive/MyDrive/FaceForensicsTest/
       FROM_FILE: False
       # FAKETYPE: [original, Deepfakes]
       # FAKETYPE: [original, Deepfakes, Face2Face, FaceSwap, NeuralTextures]
@@ -152,7 +152,7 @@ PREPROCESSING:
   DATASET: FaceForensics
   SPLIT: train
   ROOT: /content/drive/MyDrive/FaceForensicsTest/
-  FAKETYPE: [Deepfakes, Face2Face, FaceSwap, NeuralTextures]
+  FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
   IMAGE_SUFFIX: jpg
   DATA_TYPE: images
   LABEL: [real, fake]
