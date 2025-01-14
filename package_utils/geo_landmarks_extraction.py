@@ -208,7 +208,7 @@ class LandmarkUtility(object):
             # Visualizing landmarks to test
             #if i < 50 and self.debug: # modify: i < 10
             print(f"Drawing landmarks for image {i}...")  # Debugging outp
-            if rot_f_lms:  # Check if landmarks exist
+            if rot_f_lms is not None and rot_f_lms.size > 0:  # Check if landmarks exist
                 print(f"Landmarks coordinates for image {i}: {rot_f_lms}")
                 rot_img = draw_landmarks(rot_img, rot_f_lms)
                 print(f"Landmarks drawn successfully for image {i}. Saving the image...")
