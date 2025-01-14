@@ -276,8 +276,26 @@ if __name__ == '__main__':
     
     if extract_landmark:
         assert cfg.PREPROCESSING.facial_lm_pretrained is not None, "Landmark pretrained can not be None!"
-        f_detector = dlib.get_frontal_face_detector()
-        f_lm_detector = dlib.shape_predictor(cfg.PREPROCESSING.facial_lm_pretrained)
+        
+        # NjoomEdit: Initialize Dlib's face detector
+        try:
+            f_detector = dlib.get_frontal_face_detector()
+            print("Face detector initialized successfully.")
+        except Exception as e:
+            print(f"Error initializing face detector: {e}")
+            f_detector = None  # Set to None to avoid using an uninitialized detector
+        #NjoomEdit:# Load the shape predictor model
+        shape_predictor_path = cfg.PREPROCESSING.facial_lm_pretraine
+        try:
+            f_lm_detector = dlib.shape_predictor(shape_predictor_path)
+            print(f"Shape predictor model loaded successfully from {shape_predictor_path}.")
+        except Exception as e:
+            print(f"Error loading shape predictor model from {shape_predictor_path}: {e}")
+            f_lm_detector = None  # Set to None to avoid using an uninitialized predictor
+    
+        #f_detector = dlib.get_frontal_face_detector()
+        #f_lm_detector = dlib.shape_predictor(cfg.PREPROCESSING.facial_lm_pretrained)
+
         if save_aligned:
             #  Define main output directory based on dataset name and split
             main_output_dir = f'{lm_ins.image_root}/{lm_ins.split}/frames/'
