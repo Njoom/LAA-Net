@@ -17,7 +17,7 @@ from package_utils.transform import final_transform
 from package_utils.image_utils import cal_mask_wh, gaussian_radius
 
 
-PREFIX_PATH = '/data/deepfake_cluster/datasets_df/FaceForensics++/c0/'
+PREFIX_PATH = '/content/drive/MyDrive/FaceForensicsTest/'
 
 
 @DATASETS.register_module()
