@@ -59,7 +59,7 @@ class CommonDataset(Dataset, ABC):
             anno_file = data_cfg[split.upper()].ANNO_FILE
         if not os.access(anno_file, os.R_OK):
             anno_file = os.path.join(self._cfg.DATA[self.split.upper()].ROOT, anno_file)
-            print(anno_file)
+            print(f"Checking annotation file at: {anno_file}")
         assert os.access(anno_file, os.R_OK), "Annotation file can not be invalid!!"
 
         f_name, f_extention = file_extention(anno_file)
