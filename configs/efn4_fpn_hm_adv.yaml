@@ -33,7 +33,7 @@ DATASET:
       FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
       #ANNO_FILE:Path to annotation files that provide labels for the data.
       # ANNO_FILE: train/frames/FaceXRay/train_FF_FaceXRay.json
-      ANNO_FILE: processed_data/c0/test_81_FF++_processed.json
+      ANNO_FILE: processed_data/c0/test_FaceForensicsTest_Deepfakes_81.json
       LABEL_FOLDER: [real, fake]
     VAL:
       NAME: FF++ # This field to define datasets that can be used to train/in-dataset/cross-dataset evaluation
