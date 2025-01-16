@@ -41,7 +41,7 @@ DATASET:
       FROM_FILE: True
       FAKETYPE: [Deepfakes, Face2Face,  NeuralTextures] # Choosing Deepfake techniques to be loaded for dataloader
       # ANNO_FILE: val/frames/FaceXRay/val_FF_FaceXRay.json
-      ANNO_FILE: /content/LAA-Net/processed_data/c0/test_FaceForensicsTest_Deepfakes_81.json
+      ANNO_FILE: /content/LAA-Net/processed_data/c0/train_FaceForensicsTest_Deepfakes_81.json
       LABEL_FOLDER: [real, fake]
     TEST:
       NAME: DFW
@@ -160,5 +160,5 @@ PREPROCESSING:
   IMAGE_SUFFIX: jpg
   DATA_TYPE: images
   LABEL: [real, fake]
-  facial_lm_pretrained: pretrained/shape_predictor_68_face_landmarks.dat
+  facial_lm_pretrained: /content/LAA-Net/pretrained/shape_predictor_81_face_landmarks.dat
   DEBUG: False
