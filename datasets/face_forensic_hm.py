@@ -311,6 +311,10 @@ class HeatmapFaceForensic(MasterDataset):
         batch_data["cstency_heatmap"] = cstency_heatmap
         
         return batch_data
+    #NjoomEdit!
+    def train_worker_init_fn(self, worker_id):
+        # print('Current state {} --- worker id {}'.format(np.random.get_state()[1][0], worker_id))
+        np.random.seed(np.random.get_state()[1][0] + worker_id)
 
 if __name__=="__main__":
     # from datasets import *
