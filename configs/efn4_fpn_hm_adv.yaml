@@ -61,7 +61,7 @@ DATASET:
       # FAKETYPE: [fake, real]
       # FAKETYPE: [DeepFakeDetection_original, DeepFakeDetection]
       FAKETYPE: [real_test, fake_test]
-      ANNO_FILE:/content/LAA-Net/processed_data/c0/test_FaceForensicsTest_Deepfakes_81.json
+      ANNO_FILE: /content/LAA-Net/processed_data/c0/test_FaceForensicsTest_Deepfakes_81.json
       LABEL_FOLDER: [real, fake]
   TRANSFORM:
     geometry:
