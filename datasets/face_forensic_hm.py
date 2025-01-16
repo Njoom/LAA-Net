@@ -62,8 +62,13 @@ class HeatmapFaceForensic(MasterDataset):
         
         if not from_file:
             image_paths, labels, mask_paths, ot_props = self._load_from_path(split)
+            result1 = self._load_from_path(split)
+            print(f"Result from _load_from_path({split}): {result1}")
+
         else:
             image_paths, labels, mask_paths, ot_props = self._load_from_file(split)
+            result2 = self._load_from_file(split)
+            print(f"Result from _load_from_file({split}): {result2}")
             
         if self.sampler_active and self.train:
             print('Running sampler...')
