@@ -27,7 +27,7 @@ DATASET:
       TEST: 32
     TRAIN:
       NAME: FF++ # This field to define datasets that can be used to train/in-dataset/cross-dataset evaluation
-      ROOT: /content/drive/MyDrive/FaceForensicsTest/
+      ROOT: /content/drive/MyDrive/FaceForensicsTest/c0
       # ROOT: /data/deepfake_cluster/datasets_df/FaceForensics++/c0/
       FROM_FILE: True
       FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
@@ -37,11 +37,11 @@ DATASET:
       LABEL_FOLDER: [real, fake]
     VAL:
       NAME: FF++ # This field to define datasets that can be used to train/in-dataset/cross-dataset evaluation
-      ROOT: /content/drive/MyDrive/FaceForensicsTest/
+      ROOT: /content/drive/MyDrive/FaceForensicsTest/c0
       FROM_FILE: True
       FAKETYPE: [Deepfakes, Face2Face,  NeuralTextures] # Choosing Deepfake techniques to be loaded for dataloader
       # ANNO_FILE: val/frames/FaceXRay/val_FF_FaceXRay.json
-      ANNO_FILE: processed_data/c0/test_81_FF++_processed.json
+      ANNO_FILE: /content/LAA-Net/processed_data/c0/test_FaceForensicsTest_Deepfakes_81.json
       LABEL_FOLDER: [real, fake]
     TEST:
       NAME: DFW
@@ -52,7 +52,7 @@ DATASET:
       # ROOT: /home/users/<user>/data/DFDCP/
       # ROOT: /home/users/<user>/data/DFDC/
       # ROOT: /home/users/<user>/data/DFD/
-      ROOT: /content/drive/MyDrive/FaceForensicsTest/
+      ROOT: /content/drive/MyDrive/FaceForensicsTest/c0
       FROM_FILE: False
       # FAKETYPE: [original, Deepfakes]
       # FAKETYPE: [original, Deepfakes, Face2Face, FaceSwap, NeuralTextures]
@@ -61,7 +61,7 @@ DATASET:
       # FAKETYPE: [fake, real]
       # FAKETYPE: [DeepFakeDetection_original, DeepFakeDetection]
       FAKETYPE: [real_test, fake_test]
-      ANNO_FILE: FaceXRay/test/test_FF_Xray.json
+      ANNO_FILE:/content/LAA-Net/processed_data/c0/test_FaceForensicsTest_Deepfakes_81.json
       LABEL_FOLDER: [real, fake]
   TRANSFORM:
     geometry:
@@ -155,7 +155,7 @@ TEST:
 PREPROCESSING:
   DATASET: FaceForensics
   SPLIT: train
-  ROOT: /content/drive/MyDrive/FaceForensicsTest/
+  ROOT: /content/drive/MyDrive/FaceForensicsTest/c0
   FAKETYPE: [Deepfakes, Face2Face, NeuralTextures]
   IMAGE_SUFFIX: jpg
   DATA_TYPE: images
