@@ -17,7 +17,7 @@ from package_utils.transform import final_transform
 from package_utils.image_utils import cal_mask_wh, gaussian_radius
 
 
-PREFIX_PATH = '/content/drive/MyDrive/FaceForensicsTest/'
+PREFIX_PATH = '/content/drive/MyDrive/FaceForensicsTest/c0'
 
 
 @DATASETS.register_module()
