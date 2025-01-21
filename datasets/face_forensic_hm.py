@@ -49,6 +49,10 @@ class HeatmapFaceForensic(MasterDataset):
         
         #Load data
         self.image_paths, self.labels, self.mask_paths, self.ot_props = self._load_data(split)
+
+        #NjoomEdit:
+        print(f"Config: {config}")  # Print the entire config to understand what's being passed
+        print(f"Data Loader Split: {self.split}")
         
         # predefine mask distortion
         self.distortion = iaa.Sequential([iaa.PiecewiseAffine(scale=(0.01, 0.15))])
@@ -59,10 +63,13 @@ class HeatmapFaceForensic(MasterDataset):
 
     def _load_data(self, split):
         from_file = self._cfg.DATA[self.split.upper()].FROM_FILE
+        print(f"Loading data from file: {from_file}") #NjoomEdit
         
         if not from_file:
+            print(f"Loading from path for split '{split}'") #NjoomEdit
             image_paths, labels, mask_paths, ot_props = self._load_from_path(split)
         else:
+            print(f"Loading from path for split '{split}'") #NjoomEdit
             image_paths, labels, mask_paths, ot_props = self._load_from_file(split)
                 
         if self.sampler_active and self.train:
@@ -311,7 +318,7 @@ class HeatmapFaceForensic(MasterDataset):
         batch_data["cstency_heatmap"] = cstency_heatmap
         
         return batch_data
-    #NjoomEdit!
+    #NjoomEdit: add method train_worker_init_fn!
     def train_worker_init_fn(self, worker_id):
         # print('Current state {} --- worker id {}'.format(np.random.get_state()[1][0], worker_id))
         np.random.seed(np.random.get_state()[1][0] + worker_id)
