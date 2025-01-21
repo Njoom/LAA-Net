@@ -15,9 +15,14 @@ class MasterDataset(CDFV1, FF, DFDCP, CDFV2, DFDC, DFD, DFW):
         super().__init__(cfg, **kwargs)
     
     def _load_from_path(self, split):
+        #
+        print(f"Loading data for split: {split}")
+        data_path = self._cfg.DATA[split].PATH  # Update this line based on your actual property.
+        print(f"Data path: {data_path}") 
+
         # Explicitly overide some main methods from the dataset config
         if self.dataset == 'FF++':
-            return MasterDataset.__mro__[2]._load_from_path(self, split=split)
+            return MasterDataset.__mro__[2]._load_from_path(self, split=split) 
         elif self.dataset == 'Celeb-DFv1':
             return MasterDataset.__mro__[1]._load_from_path(self, split=split)
         elif self.dataset == 'DFDCP':
