@@ -62,14 +62,9 @@ class HeatmapFaceForensic(MasterDataset):
         
         if not from_file:
             image_paths, labels, mask_paths, ot_props = self._load_from_path(split)
-            result1 = self._load_from_path(split)
-            print(f"Result from _load_from_path({split}): {result1}")
-
         else:
             image_paths, labels, mask_paths, ot_props = self._load_from_file(split)
-            result2 = self._load_from_file(split)
-            print(f"Result from _load_from_file({split}): {result2}")
-            
+                
         if self.sampler_active and self.train:
             print('Running sampler...')
             params = dict(mask_paths=mask_paths, ot_props=ot_props)
@@ -331,7 +326,7 @@ if __name__=="__main__":
     PIPELINES.register_module(module=GeometryTransform)
     PIPELINES.register_module(module=ColorJitterTransform)
 
-    config = load_config("configs/efn4_fpn_hm.yaml")
+    config = load_config("configs/efn4_fpn_hm_adv.yaml")
     hm_ff = DATASETS.build(cfg=config.DATASET, default_args=dict(split='train', config=config.DATASET))
     hm_ff_loader = DataLoader(hm_ff,
                               batch_size=10,
