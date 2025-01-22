@@ -41,7 +41,7 @@ DATASET:
       FROM_FILE: True
       FAKETYPE: [Deepfakes, Face2Face,  NeuralTextures] # Choosing Deepfake techniques to be loaded for dataloader
       # ANNO_FILE: val/frames/FaceXRay/val_FF_FaceXRay.json
-      ANNO_FILE: /content/LAA-Net/processed_data/c0/train_FaceForensicsTest_Deepfakes_81.json
+      ANNO_FILE: /content/LAA-Net/processed_data/c0/val_FaceForensicsTest_Deepfakes_81.json
       LABEL_FOLDER: [real, fake]
     TEST:
       NAME: FF++
