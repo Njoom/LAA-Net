@@ -62,8 +62,7 @@ class HeatmapFaceForensic(MasterDataset):
         self.colorjitter_transform = build_pipeline(config.TRANSFORM.color, PIPELINES)
 
     def _load_data(self, split):
-        print("Available keys in self._cfg.DATA:", self._cfg.DATA.keys())  # Helps understand what keys are available
-        print(f"Attempting to load data for split: {split}")
+        split = split.upper()
         if split not in self._cfg.DATA: #NjoomEdit
             raise ValueError(f"Split '{split}' not found in configuration!")
         
