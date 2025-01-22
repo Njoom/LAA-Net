@@ -53,7 +53,7 @@ DATASET:
       # ROOT: /home/users/<user>/data/DFDC/
       # ROOT: /home/users/<user>/data/DFD/
       ROOT: /content/drive/MyDrive/FaceForensicsTest/c0/test
-      FROM_FILE: True
+      FROM_FILE: false
       # FAKETYPE: [original, Deepfakes]
       # FAKETYPE: [original, Deepfakes, Face2Face, FaceSwap, NeuralTextures]
       # FAKETYPE: [Celeb-real, Celeb-synthesis, YouTube-real]
