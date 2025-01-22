@@ -62,6 +62,11 @@ class HeatmapFaceForensic(MasterDataset):
         self.colorjitter_transform = build_pipeline(config.TRANSFORM.color, PIPELINES)
 
     def _load_data(self, split):
+        
+        if split not in self._cfg.DATA: #NjoomEdit
+            raise ValueError(f"Split '{split}' not found in configuration!")
+        
+        
         from_file = self._cfg.DATA[self.split.upper()].FROM_FILE
         print(f"Loading data from file: {from_file}") #NjoomEdit
         
